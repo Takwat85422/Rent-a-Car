@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Daune</title>
+</head>
+<body>
+<h1>Daune</h1>
+
+<a th:href="@{/daune/nou}">+ Adauga dauna</a>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr><th>ID</th><th>Contract</th><th>Data</th><th>Descriere</th><th>Cost</th><th>Status</th><th>Responsabil</th><th>Actiuni</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${daune}">
+        <td th:text="${d.idDauna}"></td>
+        <td th:text="${d.contract != null ? '#' + d.contract.idContract : ''}"></td>
+        <td th:text="${d.dataConstatare}"></td>
+        <td th:text="${d.descriere}"></td>
+        <td th:text="${d.cost}"></td>
+        <td th:text="${d.status}"></td>
+        <td th:text="${d.responsabil}"></td>
+        <td>
+            <a th:href="@{/daune/{id}/editare(id=${d.idDauna})}">Editeaza</a>
+            <form th:action="@{/daune/{id}/sterge(id=${d.idDauna})}" method="post"
+                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                <button type="submit">Sterge</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${daune.isEmpty()}">
+        <td colspan="8">Nicio dauna inca.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
