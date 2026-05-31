@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Clienti</title>
+</head>
+<body>
+<h1>Clienti</h1>
+
+<a th:href="@{/clienti/nou}">+ Adauga client</a>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th><th>Nume</th><th>Prenume</th><th>CNP</th>
+        <th>Email</th><th>Telefon</th><th>Status</th><th>Permis</th><th>Actiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${clienti}">
+        <td th:text="${c.idClient}"></td>
+        <td th:text="${c.nume}"></td>
+        <td th:text="${c.prenume}"></td>
+        <td th:text="${c.cnp}"></td>
+        <td th:text="${c.email}"></td>
+        <td th:text="${c.telefon}"></td>
+        <td th:text="${c.statusClient}"></td>
+        <td th:text="${c.permis != null ? c.permis.numarPermis : '-'}"></td>
+        <td>
+            <a th:href="@{/clienti/{id}/editare(id=${c.idClient})}">Editeaza</a>
+            <form th:action="@{/clienti/{id}/sterge(id=${c.idClient})}" method="post"
+                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                <button type="submit">Sterge</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${clienti.isEmpty()}">
+        <td colspan="9">Niciun client inca.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

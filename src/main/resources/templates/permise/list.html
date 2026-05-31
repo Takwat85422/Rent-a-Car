@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Permise</title>
+</head>
+<body>
+<h1>Permise de conducere</h1>
+
+<a th:href="@{/permise/nou}">+ Adauga permis</a>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th><th>Numar</th><th>Categorie</th><th>Tara</th>
+        <th>Emitere</th><th>Expirare</th><th>Client</th><th>Actiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${permise}">
+        <td th:text="${p.idPermis}"></td>
+        <td th:text="${p.numarPermis}"></td>
+        <td th:text="${p.categoriePrincipala}"></td>
+        <td th:text="${p.taraEmitenta}"></td>
+        <td th:text="${p.dataEmitere}"></td>
+        <td th:text="${p.dataExpirare}"></td>
+        <td th:text="${p.client != null ? p.client.nume + ' ' + p.client.prenume : ''}"></td>
+        <td>
+            <a th:href="@{/permise/{id}/editare(id=${p.idPermis})}">Editeaza</a>
+            <form th:action="@{/permise/{id}/sterge(id=${p.idPermis})}" method="post"
+                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                <button type="submit">Sterge</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${permise.isEmpty()}">
+        <td colspan="8">Niciun permis inca.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

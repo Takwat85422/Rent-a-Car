@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Autovehicule</title>
+</head>
+<body>
+<h1>Autovehicule</h1>
+
+<a th:href="@{/autovehicule/nou}">+ Adauga autovehicul</a>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th><th>Marca</th><th>Model</th><th>An</th>
+        <th>Nr. inmatriculare</th><th>Categorie</th>
+        <th>Combustibil</th><th>Transmisie</th><th>Km</th><th>Stare</th><th>Actiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${autovehicule}">
+        <td th:text="${a.idAutovehicul}"></td>
+        <td th:text="${a.marca}"></td>
+        <td th:text="${a.model}"></td>
+        <td th:text="${a.anFabricatie}"></td>
+        <td th:text="${a.nrInmatriculare}"></td>
+        <td th:text="${a.categorie != null ? a.categorie.denumire : ''}"></td>
+        <td th:text="${a.combustibil}"></td>
+        <td th:text="${a.transmisie}"></td>
+        <td th:text="${a.kmCurenti}"></td>
+        <td th:text="${a.stare}"></td>
+        <td>
+            <a th:href="@{/autovehicule/{id}/editare(id=${a.idAutovehicul})}">Editeaza</a>
+            <form th:action="@{/autovehicule/{id}/sterge(id=${a.idAutovehicul})}" method="post"
+                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                <button type="submit">Sterge</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${autovehicule.isEmpty()}">
+        <td colspan="11">Niciun autovehicul inca.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
