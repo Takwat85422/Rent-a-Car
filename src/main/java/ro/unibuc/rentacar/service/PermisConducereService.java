@@ -1,5 +1,7 @@
 package ro.unibuc.rentacar.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ro.unibuc.rentacar.entity.PermisConducere;
 import ro.unibuc.rentacar.repository.PermisConducereRepository;
@@ -17,6 +19,10 @@ public class PermisConducereService {
 
     public List<PermisConducere> findAll() {
         return repo.findAll();
+    }
+
+    public Page<PermisConducere> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     public PermisConducere findById(Long id) {

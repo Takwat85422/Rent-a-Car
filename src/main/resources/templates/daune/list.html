@@ -8,10 +8,23 @@
     <a th:href="@{/daune/nou}">+ Adauga dauna</a>
     <table>
         <thead>
-        <tr><th>ID</th><th>Contract</th><th>Data</th><th>Descriere</th><th>Cost</th><th>Status</th><th>Responsabil</th><th>Actiuni</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Contract</th>
+            <th>Data</th>
+            <th>Descriere</th>
+            <th>Cost
+                <a th:href="@{/daune(size=${page.size}, sort='cost,asc')}">&#9650;</a>
+                <a th:href="@{/daune(size=${page.size}, sort='cost,desc')}">&#9660;</a></th>
+            <th>Status
+                <a th:href="@{/daune(size=${page.size}, sort='status,asc')}">&#9650;</a>
+                <a th:href="@{/daune(size=${page.size}, sort='status,desc')}">&#9660;</a></th>
+            <th>Responsabil</th>
+            <th>Actiuni</th>
+        </tr>
         </thead>
         <tbody>
-        <tr th:each="d : ${daune}">
+        <tr th:each="d : ${page.content}">
             <td th:text="${d.idDauna}"></td>
             <td th:text="${d.contract != null ? '#' + d.contract.idContract : ''}"></td>
             <td th:text="${d.dataConstatare}"></td>
@@ -27,11 +40,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${daune.isEmpty()}">
-            <td colspan="8">Nicio dauna inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="8">Nicio dauna inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/daune(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/daune(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

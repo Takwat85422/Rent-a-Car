@@ -9,12 +9,22 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th><th>Numar</th><th>Categorie</th><th>Tara</th>
-            <th>Emitere</th><th>Expirare</th><th>Client</th><th>Actiuni</th>
+            <th>ID</th>
+            <th>Numar
+                <a th:href="@{/permise(size=${page.size}, sort='numarPermis,asc')}">&#9650;</a>
+                <a th:href="@{/permise(size=${page.size}, sort='numarPermis,desc')}">&#9660;</a></th>
+            <th>Categorie</th>
+            <th>Tara</th>
+            <th>Emitere</th>
+            <th>Expirare
+                <a th:href="@{/permise(size=${page.size}, sort='dataExpirare,asc')}">&#9650;</a>
+                <a th:href="@{/permise(size=${page.size}, sort='dataExpirare,desc')}">&#9660;</a></th>
+            <th>Client</th>
+            <th>Actiuni</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="p : ${permise}">
+        <tr th:each="p : ${page.content}">
             <td th:text="${p.idPermis}"></td>
             <td th:text="${p.numarPermis}"></td>
             <td th:text="${p.categoriePrincipala}"></td>
@@ -30,11 +40,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${permise.isEmpty()}">
-            <td colspan="8">Niciun permis inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="8">Niciun permis inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/permise(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/permise(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

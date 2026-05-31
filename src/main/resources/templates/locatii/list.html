@@ -8,10 +8,21 @@
     <a th:href="@{/locatii/nou}">+ Adauga locatie</a>
     <table>
         <thead>
-        <tr><th>ID</th><th>Oras</th><th>Adresa</th><th>Tip</th><th>Program</th><th>Actiuni</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Oras
+                <a th:href="@{/locatii(size=${page.size}, sort='oras,asc')}">&#9650;</a>
+                <a th:href="@{/locatii(size=${page.size}, sort='oras,desc')}">&#9660;</a></th>
+            <th>Adresa</th>
+            <th>Tip
+                <a th:href="@{/locatii(size=${page.size}, sort='tip,asc')}">&#9650;</a>
+                <a th:href="@{/locatii(size=${page.size}, sort='tip,desc')}">&#9660;</a></th>
+            <th>Program</th>
+            <th>Actiuni</th>
+        </tr>
         </thead>
         <tbody>
-        <tr th:each="l : ${locatii}">
+        <tr th:each="l : ${page.content}">
             <td th:text="${l.idLocatie}"></td>
             <td th:text="${l.oras}"></td>
             <td th:text="${l.adresa}"></td>
@@ -25,11 +36,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${locatii.isEmpty()}">
-            <td colspan="6">Nicio locatie inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="6">Nicio locatie inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/locatii(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/locatii(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

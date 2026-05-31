@@ -1,5 +1,7 @@
 package ro.unibuc.rentacar.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ro.unibuc.rentacar.entity.Plata;
 import ro.unibuc.rentacar.repository.PlataRepository;
@@ -17,6 +19,10 @@ public class PlataService {
 
     public List<Plata> findAll() {
         return repo.findAll();
+    }
+
+    public Page<Plata> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     public Plata findById(Long id) {

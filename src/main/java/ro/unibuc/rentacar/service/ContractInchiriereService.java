@@ -1,5 +1,7 @@
 package ro.unibuc.rentacar.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.unibuc.rentacar.entity.Autovehicul;
@@ -25,6 +27,10 @@ public class ContractInchiriereService {
 
     public List<ContractInchiriere> findAll() {
         return repo.findAll();
+    }
+
+    public Page<ContractInchiriere> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     public ContractInchiriere findById(Long id) {

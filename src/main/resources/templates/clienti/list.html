@@ -9,12 +9,23 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th><th>Nume</th><th>Prenume</th><th>CNP</th>
-            <th>Email</th><th>Telefon</th><th>Status</th><th>Permis</th><th>Actiuni</th>
+            <th>ID</th>
+            <th>Nume
+                <a th:href="@{/clienti(size=${page.size}, sort='nume,asc')}">&#9650;</a>
+                <a th:href="@{/clienti(size=${page.size}, sort='nume,desc')}">&#9660;</a></th>
+            <th>Prenume</th>
+            <th>CNP</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Status
+                <a th:href="@{/clienti(size=${page.size}, sort='statusClient,asc')}">&#9650;</a>
+                <a th:href="@{/clienti(size=${page.size}, sort='statusClient,desc')}">&#9660;</a></th>
+            <th>Permis</th>
+            <th>Actiuni</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="c : ${clienti}">
+        <tr th:each="c : ${page.content}">
             <td th:text="${c.idClient}"></td>
             <td th:text="${c.nume}"></td>
             <td th:text="${c.prenume}"></td>
@@ -31,11 +42,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${clienti.isEmpty()}">
-            <td colspan="9">Niciun client inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="9">Niciun client inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/clienti(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/clienti(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

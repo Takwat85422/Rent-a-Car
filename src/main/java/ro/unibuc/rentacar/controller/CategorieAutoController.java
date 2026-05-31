@@ -1,6 +1,8 @@
 package ro.unibuc.rentacar.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,39 +20,33 @@ public class CategorieAutoController {
         this.service = service;
     }
 
-    // READ - lista
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("categorii", service.findAll());
+    public String list(@PageableDefault(size = 5) Pageable pageable, Model model) {
+        model.addAttribute("page", service.findAll(pageable));
         return "categorii/list";
     }
 
-    // CREATE - formular gol
     @GetMapping("/nou")
     public String formNou(Model model) {
         model.addAttribute("categorie", new CategorieAuto());
         return "categorii/form";
     }
 
-    // UPDATE - formular cu date existente
     @GetMapping("/{id}/editare")
     public String formEditare(@PathVariable Long id, Model model) {
         model.addAttribute("categorie", service.findById(id));
         return "categorii/form";
     }
 
-    // CREATE + UPDATE - salvare cu validare
     @PostMapping("/salveaza")
-    public String salveaza(@Valid @ModelAttribute("categorie") CategorieAuto categorie,
-                           BindingResult result) {
+    public String salveaza(@Valid @ModelAttribute("categorie") CategorieAuto categorie, BindingResult result) {
         if (result.hasErrors()) {
-            return "categorii/form";   // re-afiseaza formularul cu mesajele de eroare
+            return "categorii/form";
         }
         service.save(categorie);
         return "redirect:/categorii";
     }
 
-    // DELETE
     @PostMapping("/{id}/sterge")
     public String sterge(@PathVariable Long id) {
         service.deleteById(id);

@@ -8,10 +8,21 @@
     <a th:href="@{/categorii/nou}">+ Adauga categorie</a>
     <table>
         <thead>
-        <tr><th>ID</th><th>Denumire</th><th>Descriere</th><th>Permis</th><th>Tarif/zi</th><th>Actiuni</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Denumire
+                <a th:href="@{/categorii(size=${page.size}, sort='denumire,asc')}">&#9650;</a>
+                <a th:href="@{/categorii(size=${page.size}, sort='denumire,desc')}">&#9660;</a></th>
+            <th>Descriere</th>
+            <th>Permis</th>
+            <th>Tarif/zi
+                <a th:href="@{/categorii(size=${page.size}, sort='tarifZi,asc')}">&#9650;</a>
+                <a th:href="@{/categorii(size=${page.size}, sort='tarifZi,desc')}">&#9660;</a></th>
+            <th>Actiuni</th>
+        </tr>
         </thead>
         <tbody>
-        <tr th:each="c : ${categorii}">
+        <tr th:each="c : ${page.content}">
             <td th:text="${c.idCategorie}"></td>
             <td th:text="${c.denumire}"></td>
             <td th:text="${c.descriere}"></td>
@@ -25,11 +36,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${categorii.isEmpty()}">
-            <td colspan="6">Nicio categorie inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="6">Nicio categorie inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/categorii(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/categorii(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

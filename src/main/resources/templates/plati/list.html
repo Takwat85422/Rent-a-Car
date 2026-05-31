@@ -8,10 +8,22 @@
     <a th:href="@{/plati/nou}">+ Adauga plata</a>
     <table>
         <thead>
-        <tr><th>ID</th><th>Contract</th><th>Data</th><th>Suma</th><th>Metoda</th><th>Status</th><th>Actiuni</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Contract</th>
+            <th>Data</th>
+            <th>Suma
+                <a th:href="@{/plati(size=${page.size}, sort='suma,asc')}">&#9650;</a>
+                <a th:href="@{/plati(size=${page.size}, sort='suma,desc')}">&#9660;</a></th>
+            <th>Metoda</th>
+            <th>Status
+                <a th:href="@{/plati(size=${page.size}, sort='status,asc')}">&#9650;</a>
+                <a th:href="@{/plati(size=${page.size}, sort='status,desc')}">&#9660;</a></th>
+            <th>Actiuni</th>
+        </tr>
         </thead>
         <tbody>
-        <tr th:each="p : ${plati}">
+        <tr th:each="p : ${page.content}">
             <td th:text="${p.idPlata}"></td>
             <td th:text="${p.contract != null ? '#' + p.contract.idContract : ''}"></td>
             <td th:text="${p.dataPlata}"></td>
@@ -26,11 +38,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${plati.isEmpty()}">
-            <td colspan="7">Nicio plata inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="7">Nicio plata inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/plati(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/plati(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

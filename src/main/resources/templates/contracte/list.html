@@ -9,13 +9,25 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th><th>Client</th><th>Masina</th>
-            <th>Start</th><th>Sfarsit</th><th>Tarif/zi</th>
-            <th>Status</th><th>Nr. servicii</th><th>Actiuni</th>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Masina</th>
+            <th>Start
+                <a th:href="@{/contracte(size=${page.size}, sort='dataStart,asc')}">&#9650;</a>
+                <a th:href="@{/contracte(size=${page.size}, sort='dataStart,desc')}">&#9660;</a></th>
+            <th>Sfarsit</th>
+            <th>Tarif/zi
+                <a th:href="@{/contracte(size=${page.size}, sort='tarifZi,asc')}">&#9650;</a>
+                <a th:href="@{/contracte(size=${page.size}, sort='tarifZi,desc')}">&#9660;</a></th>
+            <th>Status
+                <a th:href="@{/contracte(size=${page.size}, sort='status,asc')}">&#9650;</a>
+                <a th:href="@{/contracte(size=${page.size}, sort='status,desc')}">&#9660;</a></th>
+            <th>Nr. servicii</th>
+            <th>Actiuni</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="c : ${contracte}">
+        <tr th:each="c : ${page.content}">
             <td th:text="${c.idContract}"></td>
             <td th:text="${c.client != null ? c.client.nume + ' ' + c.client.prenume : ''}"></td>
             <td th:text="${c.autovehicul != null ? c.autovehicul.marca + ' ' + c.autovehicul.model + ' (' + c.autovehicul.nrInmatriculare + ')' : ''}"></td>
@@ -32,11 +44,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${contracte.isEmpty()}">
-            <td colspan="9">Niciun contract inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="9">Niciun contract inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/contracte(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/contracte(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

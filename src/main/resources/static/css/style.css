@@ -47,3 +47,9 @@ form button + a { margin-left:10px; }
 .card:hover { border-color:var(--primary); box-shadow:0 2px 8px rgba(0,0,0,.06); }
 .card h3 { margin:0 0 6px; color:var(--primary); }
 .card p { margin:0; color:var(--muted); font-size:14px; }
+
+.pagination { margin-top:16px; display:flex; align-items:center; gap:16px; }
+.pagination a { color:var(--primary); text-decoration:none; font-weight:600; }
+.pagination span { color:var(--muted); font-size:14px; }
+th a { text-decoration:none; font-size:11px; color:var(--muted); }
+th a:hover { color:var(--primary); }

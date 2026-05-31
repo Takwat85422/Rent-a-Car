@@ -1,5 +1,7 @@
 package ro.unibuc.rentacar.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ro.unibuc.rentacar.entity.Client;
 import ro.unibuc.rentacar.repository.ClientRepository;
@@ -17,6 +19,10 @@ public class ClientService {
 
     public List<Client> findAll() {
         return repo.findAll();
+    }
+
+    public Page<Client> findAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     public Client findById(Long id) {

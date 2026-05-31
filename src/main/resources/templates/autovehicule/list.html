@@ -9,13 +9,29 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th><th>Marca</th><th>Model</th><th>An</th>
-            <th>Nr. inmatriculare</th><th>Categorie</th>
-            <th>Combustibil</th><th>Transmisie</th><th>Km</th><th>Stare</th><th>Actiuni</th>
+            <th>ID</th>
+            <th>Marca
+                <a th:href="@{/autovehicule(size=${page.size}, sort='marca,asc')}">&#9650;</a>
+                <a th:href="@{/autovehicule(size=${page.size}, sort='marca,desc')}">&#9660;</a></th>
+            <th>Model</th>
+            <th>An
+                <a th:href="@{/autovehicule(size=${page.size}, sort='anFabricatie,asc')}">&#9650;</a>
+                <a th:href="@{/autovehicule(size=${page.size}, sort='anFabricatie,desc')}">&#9660;</a></th>
+            <th>Nr. inmatriculare</th>
+            <th>Categorie</th>
+            <th>Combustibil</th>
+            <th>Transmisie</th>
+            <th>Km
+                <a th:href="@{/autovehicule(size=${page.size}, sort='kmCurenti,asc')}">&#9650;</a>
+                <a th:href="@{/autovehicule(size=${page.size}, sort='kmCurenti,desc')}">&#9660;</a></th>
+            <th>Stare
+                <a th:href="@{/autovehicule(size=${page.size}, sort='stare,asc')}">&#9650;</a>
+                <a th:href="@{/autovehicule(size=${page.size}, sort='stare,desc')}">&#9660;</a></th>
+            <th>Actiuni</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="a : ${autovehicule}">
+        <tr th:each="a : ${page.content}">
             <td th:text="${a.idAutovehicul}"></td>
             <td th:text="${a.marca}"></td>
             <td th:text="${a.model}"></td>
@@ -34,11 +50,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${autovehicule.isEmpty()}">
-            <td colspan="11">Niciun autovehicul inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="11">Niciun autovehicul inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/autovehicule(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/autovehicule(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>

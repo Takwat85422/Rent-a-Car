@@ -1,7 +1,8 @@
 package ro.unibuc.rentacar.controller;
 
-
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,15 +26,14 @@ public class AutovehiculController {
         this.categorieService = categorieService;
     }
 
-    // categoriile disponibile pentru dropdown - se adauga automat in model la fiecare request
     @ModelAttribute("categorii")
     public List<CategorieAuto> categorii() {
         return categorieService.findAll();
     }
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("autovehicule", service.findAll());
+    public String list(@PageableDefault(size = 5) Pageable pageable, Model model) {
+        model.addAttribute("page", service.findAll(pageable));
         return "autovehicule/list";
     }
 
@@ -50,8 +50,7 @@ public class AutovehiculController {
     }
 
     @PostMapping("/salveaza")
-    public String salveaza(@Valid @ModelAttribute("autovehicul") Autovehicul autovehicul,
-                           BindingResult result) {
+    public String salveaza(@Valid @ModelAttribute("autovehicul") Autovehicul autovehicul, BindingResult result) {
         if (result.hasErrors()) {
             return "autovehicule/form";
         }

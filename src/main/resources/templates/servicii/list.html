@@ -8,10 +8,21 @@
     <a th:href="@{/servicii/nou}">+ Adauga serviciu</a>
     <table>
         <thead>
-        <tr><th>ID</th><th>Denumire</th><th>Descriere</th><th>Pret/zi</th><th>Activ</th><th>Actiuni</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Denumire
+                <a th:href="@{/servicii(size=${page.size}, sort='denumire,asc')}">&#9650;</a>
+                <a th:href="@{/servicii(size=${page.size}, sort='denumire,desc')}">&#9660;</a></th>
+            <th>Descriere</th>
+            <th>Pret/zi
+                <a th:href="@{/servicii(size=${page.size}, sort='pretZi,asc')}">&#9650;</a>
+                <a th:href="@{/servicii(size=${page.size}, sort='pretZi,desc')}">&#9660;</a></th>
+            <th>Activ</th>
+            <th>Actiuni</th>
+        </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${servicii}">
+        <tr th:each="s : ${page.content}">
             <td th:text="${s.idServiciu}"></td>
             <td th:text="${s.denumire}"></td>
             <td th:text="${s.descriere}"></td>
@@ -25,11 +36,14 @@
                 </form>
             </td>
         </tr>
-        <tr th:if="${servicii.isEmpty()}">
-            <td colspan="6">Niciun serviciu inca.</td>
-        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="6">Niciun serviciu inca.</td></tr>
         </tbody>
     </table>
+    <div class="pagination" th:if="${page.totalPages > 1}">
+        <a th:if="${!page.first}" th:href="@{/servicii(page=${page.number-1}, size=${page.size}, sort=${param.sort})}">&laquo; Anterior</a>
+        <span>Pagina [[${page.number + 1}]] din [[${page.totalPages}]]</span>
+        <a th:if="${!page.last}" th:href="@{/servicii(page=${page.number+1}, size=${page.size}, sort=${param.sort})}">Urmator &raquo;</a>
+    </div>
 </main>
 </body>
 </html>
