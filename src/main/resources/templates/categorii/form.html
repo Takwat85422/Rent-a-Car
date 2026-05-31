@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorie auto</title>
+</head>
+<body>
+<h1 th:text="${categorie.idCategorie} == null ? 'Adauga categorie' : 'Editeaza categorie'">Categorie</h1>
+
+<form th:action="@{/categorii/salveaza}" th:object="${categorie}" method="post">
+    <input type="hidden" th:field="*{idCategorie}">
+
+    <p>
+        <label>Denumire:</label>
+        <input type="text" th:field="*{denumire}">
+        <span th:if="${#fields.hasErrors('denumire')}" th:errors="*{denumire}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Descriere:</label>
+        <input type="text" th:field="*{descriere}">
+        <span th:if="${#fields.hasErrors('descriere')}" th:errors="*{descriere}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Categorie permis:</label>
+        <input type="text" th:field="*{categoriePermisNecesara}" placeholder="ex: B">
+        <span th:if="${#fields.hasErrors('categoriePermisNecesara')}" th:errors="*{categoriePermisNecesara}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Tarif/zi:</label>
+        <input type="number" step="0.01" th:field="*{tarifZi}">
+        <span th:if="${#fields.hasErrors('tarifZi')}" th:errors="*{tarifZi}" style="color:red"></span>
+    </p>
+
+    <button type="submit">Salveaza</button>
+    <a th:href="@{/categorii}">Anuleaza</a>
+</form>
+</body>
+</html>

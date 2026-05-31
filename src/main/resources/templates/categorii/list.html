@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorii auto</title>
+</head>
+<body>
+<h1>Categorii auto</h1>
+
+<a th:href="@{/categorii/nou}">+ Adauga categorie</a>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th><th>Denumire</th><th>Descriere</th>
+        <th>Permis</th><th>Tarif/zi</th><th>Actiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${categorii}">
+        <td th:text="${c.idCategorie}"></td>
+        <td th:text="${c.denumire}"></td>
+        <td th:text="${c.descriere}"></td>
+        <td th:text="${c.categoriePermisNecesara}"></td>
+        <td th:text="${c.tarifZi}"></td>
+        <td>
+            <a th:href="@{/categorii/{id}/editare(id=${c.idCategorie})}">Editeaza</a>
+            <form th:action="@{/categorii/{id}/sterge(id=${c.idCategorie})}" method="post"
+                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                <button type="submit">Sterge</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:if="${categorii.isEmpty()}">
+        <td colspan="6">Nicio categorie inca.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
