@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Servicii extra</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Servicii extra')}"></head>
 <body>
-<h1>Servicii extra</h1>
-
-<a th:href="@{/servicii/nou}">+ Adauga serviciu</a>
-
-<table border="1" cellpadding="6">
-    <thead>
-    <tr><th>ID</th><th>Denumire</th><th>Descriere</th><th>Pret/zi</th><th>Activ</th><th>Actiuni</th></tr>
-    </thead>
-    <tbody>
-    <tr th:each="s : ${servicii}">
-        <td th:text="${s.idServiciu}"></td>
-        <td th:text="${s.denumire}"></td>
-        <td th:text="${s.descriere}"></td>
-        <td th:text="${s.pretZi}"></td>
-        <td th:text="${s.activ}"></td>
-        <td>
-            <a th:href="@{/servicii/{id}/editare(id=${s.idServiciu})}">Editeaza</a>
-            <form th:action="@{/servicii/{id}/sterge(id=${s.idServiciu})}" method="post"
-                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
-                <button type="submit">Sterge</button>
-            </form>
-        </td>
-    </tr>
-    <tr th:if="${servicii.isEmpty()}">
-        <td colspan="6">Niciun serviciu inca.</td>
-    </tr>
-    </tbody>
-</table>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1>Servicii extra</h1>
+    <a th:href="@{/servicii/nou}">+ Adauga serviciu</a>
+    <table>
+        <thead>
+        <tr><th>ID</th><th>Denumire</th><th>Descriere</th><th>Pret/zi</th><th>Activ</th><th>Actiuni</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${servicii}">
+            <td th:text="${s.idServiciu}"></td>
+            <td th:text="${s.denumire}"></td>
+            <td th:text="${s.descriere}"></td>
+            <td th:text="${s.pretZi}"></td>
+            <td th:text="${s.activ}"></td>
+            <td>
+                <a th:href="@{/servicii/{id}/editare(id=${s.idServiciu})}">Editeaza</a>
+                <form th:action="@{/servicii/{id}/sterge(id=${s.idServiciu})}" method="post"
+                      style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${servicii.isEmpty()}">
+            <td colspan="6">Niciun serviciu inca.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Permis</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Permis')}"></head>
 <body>
-<h1 th:text="${permis.idPermis} == null ? 'Adauga permis' : 'Editeaza permis'">Permis</h1>
-
-<form th:action="@{/permise/salveaza}" th:object="${permis}" method="post">
-    <input type="hidden" th:field="*{idPermis}">
-
-    <p><label>Numar permis:</label>
-        <input type="text" th:field="*{numarPermis}">
-        <span th:if="${#fields.hasErrors('numarPermis')}" th:errors="*{numarPermis}" style="color:red"></span></p>
-    <p><label>Categorie:</label>
-        <select th:field="*{categoriePrincipala}">
-            <option value="">-- alege --</option>
-            <option th:each="cat : ${ {'AM','A1','A2','A','B','BE','C','CE','D','DE'} }"
-                    th:value="${cat}" th:text="${cat}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('categoriePrincipala')}" th:errors="*{categoriePrincipala}" style="color:red"></span></p>
-    <p><label>Tara emitenta:</label>
-        <input type="text" th:field="*{taraEmitenta}">
-        <span th:if="${#fields.hasErrors('taraEmitenta')}" th:errors="*{taraEmitenta}" style="color:red"></span></p>
-    <p><label>Data emitere:</label>
-        <input type="date" th:field="*{dataEmitere}">
-        <span th:if="${#fields.hasErrors('dataEmitere')}" th:errors="*{dataEmitere}" style="color:red"></span></p>
-    <p><label>Data expirare:</label>
-        <input type="date" th:field="*{dataExpirare}">
-        <span th:if="${#fields.hasErrors('dataExpirare')}" th:errors="*{dataExpirare}" style="color:red"></span></p>
-    <p><label>Client:</label>
-        <select th:field="*{client}">
-            <option value="">-- alege --</option>
-            <option th:each="cl : ${clienti}"
-                    th:value="${cl.idClient}"
-                    th:text="${cl.nume + ' ' + cl.prenume}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}" style="color:red"></span></p>
-
-    <button type="submit">Salveaza</button>
-    <a th:href="@{/permise}">Anuleaza</a>
-</form>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1 th:text="${permis.idPermis} == null ? 'Adauga permis' : 'Editeaza permis'">Permis</h1>
+    <form th:action="@{/permise/salveaza}" th:object="${permis}" method="post">
+        <input type="hidden" th:field="*{idPermis}">
+        <p><label>Numar permis:</label>
+            <input type="text" th:field="*{numarPermis}">
+            <span th:if="${#fields.hasErrors('numarPermis')}" th:errors="*{numarPermis}" style="color:red"></span></p>
+        <p><label>Categorie:</label>
+            <select th:field="*{categoriePrincipala}">
+                <option value="">-- alege --</option>
+                <option th:each="cat : ${ {'AM','A1','A2','A','B','BE','C','CE','D','DE'} }"
+                        th:value="${cat}" th:text="${cat}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('categoriePrincipala')}" th:errors="*{categoriePrincipala}" style="color:red"></span></p>
+        <p><label>Tara emitenta:</label>
+            <input type="text" th:field="*{taraEmitenta}">
+            <span th:if="${#fields.hasErrors('taraEmitenta')}" th:errors="*{taraEmitenta}" style="color:red"></span></p>
+        <p><label>Data emitere:</label>
+            <input type="date" th:field="*{dataEmitere}">
+            <span th:if="${#fields.hasErrors('dataEmitere')}" th:errors="*{dataEmitere}" style="color:red"></span></p>
+        <p><label>Data expirare:</label>
+            <input type="date" th:field="*{dataExpirare}">
+            <span th:if="${#fields.hasErrors('dataExpirare')}" th:errors="*{dataExpirare}" style="color:red"></span></p>
+        <p><label>Client:</label>
+            <select th:field="*{client}">
+                <option value="">-- alege --</option>
+                <option th:each="cl : ${clienti}" th:value="${cl.idClient}" th:text="${cl.nume + ' ' + cl.prenume}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}" style="color:red"></span></p>
+        <button type="submit">Salveaza</button>
+        <a th:href="@{/permise}">Anuleaza</a>
+    </form>
+</main>
 </body>
 </html>

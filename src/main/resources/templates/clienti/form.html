@@ -1,46 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Client</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Client')}"></head>
 <body>
-<h1 th:text="${client.idClient} == null ? 'Adauga client' : 'Editeaza client'">Client</h1>
-
-<form th:action="@{/clienti/salveaza}" th:object="${client}" method="post">
-    <input type="hidden" th:field="*{idClient}">
-
-    <p><label>Nume:</label>
-        <input type="text" th:field="*{nume}">
-        <span th:if="${#fields.hasErrors('nume')}" th:errors="*{nume}" style="color:red"></span></p>
-    <p><label>Prenume:</label>
-        <input type="text" th:field="*{prenume}">
-        <span th:if="${#fields.hasErrors('prenume')}" th:errors="*{prenume}" style="color:red"></span></p>
-    <p><label>CNP:</label>
-        <input type="text" th:field="*{cnp}">
-        <span th:if="${#fields.hasErrors('cnp')}" th:errors="*{cnp}" style="color:red"></span></p>
-    <p><label>Data nasterii:</label>
-        <input type="date" th:field="*{dataNasterii}">
-        <span th:if="${#fields.hasErrors('dataNasterii')}" th:errors="*{dataNasterii}" style="color:red"></span></p>
-    <p><label>Email:</label>
-        <input type="text" th:field="*{email}">
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></span></p>
-    <p><label>Telefon:</label>
-        <input type="text" th:field="*{telefon}">
-        <span th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}" style="color:red"></span></p>
-    <p><label>Adresa:</label>
-        <input type="text" th:field="*{adresa}">
-        <span th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}" style="color:red"></span></p>
-    <p><label>Status:</label>
-        <select th:field="*{statusClient}">
-            <option value="activ">activ</option>
-            <option value="inactiv">inactiv</option>
-            <option value="blocat">blocat</option>
-        </select>
-        <span th:if="${#fields.hasErrors('statusClient')}" th:errors="*{statusClient}" style="color:red"></span></p>
-
-    <button type="submit">Salveaza</button>
-    <a th:href="@{/clienti}">Anuleaza</a>
-</form>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1 th:text="${client.idClient} == null ? 'Adauga client' : 'Editeaza client'">Client</h1>
+    <form th:action="@{/clienti/salveaza}" th:object="${client}" method="post">
+        <input type="hidden" th:field="*{idClient}">
+        <p><label>Nume:</label>
+            <input type="text" th:field="*{nume}">
+            <span th:if="${#fields.hasErrors('nume')}" th:errors="*{nume}" style="color:red"></span></p>
+        <p><label>Prenume:</label>
+            <input type="text" th:field="*{prenume}">
+            <span th:if="${#fields.hasErrors('prenume')}" th:errors="*{prenume}" style="color:red"></span></p>
+        <p><label>CNP:</label>
+            <input type="text" th:field="*{cnp}">
+            <span th:if="${#fields.hasErrors('cnp')}" th:errors="*{cnp}" style="color:red"></span></p>
+        <p><label>Data nasterii:</label>
+            <input type="date" th:field="*{dataNasterii}">
+            <span th:if="${#fields.hasErrors('dataNasterii')}" th:errors="*{dataNasterii}" style="color:red"></span></p>
+        <p><label>Email:</label>
+            <input type="text" th:field="*{email}">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></span></p>
+        <p><label>Telefon:</label>
+            <input type="text" th:field="*{telefon}">
+            <span th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}" style="color:red"></span></p>
+        <p><label>Adresa:</label>
+            <input type="text" th:field="*{adresa}">
+            <span th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}" style="color:red"></span></p>
+        <p><label>Status:</label>
+            <select th:field="*{statusClient}">
+                <option value="activ">activ</option>
+                <option value="inactiv">inactiv</option>
+                <option value="blocat">blocat</option>
+            </select>
+            <span th:if="${#fields.hasErrors('statusClient')}" th:errors="*{statusClient}" style="color:red"></span></p>
+        <button type="submit">Salveaza</button>
+        <a th:href="@{/clienti}">Anuleaza</a>
+    </form>
+</main>
 </body>
 </html>

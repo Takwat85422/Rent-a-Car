@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Contracte</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Contracte')}"></head>
 <body>
-<h1>Contracte de inchiriere</h1>
-
-<a th:href="@{/contracte/nou}">+ Adauga contract</a>
-
-<table border="1" cellpadding="6">
-    <thead>
-    <tr>
-        <th>ID</th><th>Client</th><th>Masina</th>
-        <th>Start</th><th>Sfarsit</th><th>Tarif/zi</th>
-        <th>Status</th><th>Nr. servicii</th><th>Actiuni</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="c : ${contracte}">
-        <td th:text="${c.idContract}"></td>
-        <td th:text="${c.client != null ? c.client.nume + ' ' + c.client.prenume : ''}"></td>
-        <td th:text="${c.autovehicul != null ? c.autovehicul.marca + ' ' + c.autovehicul.model + ' (' + c.autovehicul.nrInmatriculare + ')' : ''}"></td>
-        <td th:text="${c.dataStart}"></td>
-        <td th:text="${c.dataSfarsit}"></td>
-        <td th:text="${c.tarifZi}"></td>
-        <td th:text="${c.status}"></td>
-        <td th:text="${c.servicii.size()}"></td>
-        <td>
-            <a th:href="@{/contracte/{id}/editare(id=${c.idContract})}">Editeaza</a>
-            <form th:action="@{/contracte/{id}/sterge(id=${c.idContract})}" method="post"
-                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
-                <button type="submit">Sterge</button>
-            </form>
-        </td>
-    </tr>
-    <tr th:if="${contracte.isEmpty()}">
-        <td colspan="9">Niciun contract inca.</td>
-    </tr>
-    </tbody>
-</table>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1>Contracte de inchiriere</h1>
+    <a th:href="@{/contracte/nou}">+ Adauga contract</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Client</th><th>Masina</th>
+            <th>Start</th><th>Sfarsit</th><th>Tarif/zi</th>
+            <th>Status</th><th>Nr. servicii</th><th>Actiuni</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${contracte}">
+            <td th:text="${c.idContract}"></td>
+            <td th:text="${c.client != null ? c.client.nume + ' ' + c.client.prenume : ''}"></td>
+            <td th:text="${c.autovehicul != null ? c.autovehicul.marca + ' ' + c.autovehicul.model + ' (' + c.autovehicul.nrInmatriculare + ')' : ''}"></td>
+            <td th:text="${c.dataStart}"></td>
+            <td th:text="${c.dataSfarsit}"></td>
+            <td th:text="${c.tarifZi}"></td>
+            <td th:text="${c.status}"></td>
+            <td th:text="${c.servicii.size()}"></td>
+            <td>
+                <a th:href="@{/contracte/{id}/editare(id=${c.idContract})}">Editeaza</a>
+                <form th:action="@{/contracte/{id}/sterge(id=${c.idContract})}" method="post"
+                      style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${contracte.isEmpty()}">
+            <td colspan="9">Niciun contract inca.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>

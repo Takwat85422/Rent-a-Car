@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head th:fragment="head(titlu)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titlu}">RentACar</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav class="navbar" th:fragment="navbar">
+    <a class="brand" th:href="@{/}">RentACar</a>
+    <a th:href="@{/contracte}">Contracte</a>
+    <a th:href="@{/clienti}">Clienti</a>
+    <a th:href="@{/permise}">Permise</a>
+    <a th:href="@{/autovehicule}">Autovehicule</a>
+    <a th:href="@{/categorii}">Categorii</a>
+    <a th:href="@{/locatii}">Locatii</a>
+    <a th:href="@{/servicii}">Servicii</a>
+    <a th:href="@{/plati}">Plati</a>
+    <a th:href="@{/daune}">Daune</a>
+</nav>
+</body>
+</html>

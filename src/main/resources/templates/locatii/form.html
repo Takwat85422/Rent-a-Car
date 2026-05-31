@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Locatie</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Locatie')}"></head>
 <body>
-<h1 th:text="${locatie.idLocatie} == null ? 'Adauga locatie' : 'Editeaza locatie'">Locatie</h1>
-
-<form th:action="@{/locatii/salveaza}" th:object="${locatie}" method="post">
-    <input type="hidden" th:field="*{idLocatie}">
-
-    <p><label>Oras:</label>
-        <input type="text" th:field="*{oras}">
-        <span th:if="${#fields.hasErrors('oras')}" th:errors="*{oras}" style="color:red"></span></p>
-    <p><label>Adresa:</label>
-        <input type="text" th:field="*{adresa}">
-        <span th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}" style="color:red"></span></p>
-    <p><label>Tip:</label>
-        <select th:field="*{tip}">
-            <option value="sediu">sediu</option>
-            <option value="punct">punct</option>
-        </select>
-        <span th:if="${#fields.hasErrors('tip')}" th:errors="*{tip}" style="color:red"></span></p>
-    <p><label>Program:</label>
-        <input type="text" th:field="*{program}">
-        <span th:if="${#fields.hasErrors('program')}" th:errors="*{program}" style="color:red"></span></p>
-
-    <button type="submit">Salveaza</button>
-    <a th:href="@{/locatii}">Anuleaza</a>
-</form>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1 th:text="${locatie.idLocatie} == null ? 'Adauga locatie' : 'Editeaza locatie'">Locatie</h1>
+    <form th:action="@{/locatii/salveaza}" th:object="${locatie}" method="post">
+        <input type="hidden" th:field="*{idLocatie}">
+        <p><label>Oras:</label>
+            <input type="text" th:field="*{oras}">
+            <span th:if="${#fields.hasErrors('oras')}" th:errors="*{oras}" style="color:red"></span></p>
+        <p><label>Adresa:</label>
+            <input type="text" th:field="*{adresa}">
+            <span th:if="${#fields.hasErrors('adresa')}" th:errors="*{adresa}" style="color:red"></span></p>
+        <p><label>Tip:</label>
+            <select th:field="*{tip}">
+                <option value="sediu">sediu</option>
+                <option value="punct">punct</option>
+            </select>
+            <span th:if="${#fields.hasErrors('tip')}" th:errors="*{tip}" style="color:red"></span></p>
+        <p><label>Program:</label>
+            <input type="text" th:field="*{program}">
+            <span th:if="${#fields.hasErrors('program')}" th:errors="*{program}" style="color:red"></span></p>
+        <button type="submit">Salveaza</button>
+        <a th:href="@{/locatii}">Anuleaza</a>
+    </form>
+</main>
 </body>
 </html>

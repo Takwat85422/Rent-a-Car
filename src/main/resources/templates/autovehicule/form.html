@@ -1,94 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Autovehicul</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Autovehicul')}"></head>
 <body>
-<h1 th:text="${autovehicul.idAutovehicul} == null ? 'Adauga autovehicul' : 'Editeaza autovehicul'">Autovehicul</h1>
-
-<form th:action="@{/autovehicule/salveaza}" th:object="${autovehicul}" method="post">
-    <input type="hidden" th:field="*{idAutovehicul}">
-
-    <p>
-        <label>Marca:</label>
-        <input type="text" th:field="*{marca}">
-        <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Model:</label>
-        <input type="text" th:field="*{model}">
-        <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}" style="color:red"></span>
-    </p>
-    <p>
-        <label>An fabricatie:</label>
-        <input type="number" th:field="*{anFabricatie}">
-        <span th:if="${#fields.hasErrors('anFabricatie')}" th:errors="*{anFabricatie}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Nr. inmatriculare:</label>
-        <input type="text" th:field="*{nrInmatriculare}">
-        <span th:if="${#fields.hasErrors('nrInmatriculare')}" th:errors="*{nrInmatriculare}" style="color:red"></span>
-    </p>
-    <p>
-        <label>VIN:</label>
-        <input type="text" th:field="*{vin}">
-        <span th:if="${#fields.hasErrors('vin')}" th:errors="*{vin}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Culoare:</label>
-        <input type="text" th:field="*{culoare}">
-        <span th:if="${#fields.hasErrors('culoare')}" th:errors="*{culoare}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Categorie:</label>
-        <select th:field="*{categorie}">
-            <option value="">-- alege --</option>
-            <option th:each="cat : ${categorii}"
-                    th:value="${cat.idCategorie}"
-                    th:text="${cat.denumire}"></option>
-        </select>
-        <span th:if="${#fields.hasErrors('categorie')}" th:errors="*{categorie}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Combustibil:</label>
-        <select th:field="*{combustibil}">
-            <option value="">-- alege --</option>
-            <option value="benzina">benzina</option>
-            <option value="motorina">motorina</option>
-            <option value="hibrid">hibrid</option>
-            <option value="electric">electric</option>
-            <option value="gpl">gpl</option>
-        </select>
-        <span th:if="${#fields.hasErrors('combustibil')}" th:errors="*{combustibil}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Transmisie:</label>
-        <select th:field="*{transmisie}">
-            <option value="">-- alege --</option>
-            <option value="manuala">manuala</option>
-            <option value="automata">automata</option>
-        </select>
-        <span th:if="${#fields.hasErrors('transmisie')}" th:errors="*{transmisie}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Km curenti:</label>
-        <input type="number" th:field="*{kmCurenti}">
-        <span th:if="${#fields.hasErrors('kmCurenti')}" th:errors="*{kmCurenti}" style="color:red"></span>
-    </p>
-    <p>
-        <label>Stare:</label>
-        <select th:field="*{stare}">
-            <option value="disponibil">disponibil</option>
-            <option value="inchiriat">inchiriat</option>
-            <option value="mentenanta">mentenanta</option>
-            <option value="indisponibil">indisponibil</option>
-        </select>
-        <span th:if="${#fields.hasErrors('stare')}" th:errors="*{stare}" style="color:red"></span>
-    </p>
-
-    <button type="submit">Salveaza</button>
-    <a th:href="@{/autovehicule}">Anuleaza</a>
-</form>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1 th:text="${autovehicul.idAutovehicul} == null ? 'Adauga autovehicul' : 'Editeaza autovehicul'">Autovehicul</h1>
+    <form th:action="@{/autovehicule/salveaza}" th:object="${autovehicul}" method="post">
+        <input type="hidden" th:field="*{idAutovehicul}">
+        <p><label>Marca:</label>
+            <input type="text" th:field="*{marca}">
+            <span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}" style="color:red"></span></p>
+        <p><label>Model:</label>
+            <input type="text" th:field="*{model}">
+            <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}" style="color:red"></span></p>
+        <p><label>An fabricatie:</label>
+            <input type="number" th:field="*{anFabricatie}">
+            <span th:if="${#fields.hasErrors('anFabricatie')}" th:errors="*{anFabricatie}" style="color:red"></span></p>
+        <p><label>Nr. inmatriculare:</label>
+            <input type="text" th:field="*{nrInmatriculare}">
+            <span th:if="${#fields.hasErrors('nrInmatriculare')}" th:errors="*{nrInmatriculare}" style="color:red"></span></p>
+        <p><label>VIN:</label>
+            <input type="text" th:field="*{vin}">
+            <span th:if="${#fields.hasErrors('vin')}" th:errors="*{vin}" style="color:red"></span></p>
+        <p><label>Culoare:</label>
+            <input type="text" th:field="*{culoare}">
+            <span th:if="${#fields.hasErrors('culoare')}" th:errors="*{culoare}" style="color:red"></span></p>
+        <p><label>Categorie:</label>
+            <select th:field="*{categorie}">
+                <option value="">-- alege --</option>
+                <option th:each="cat : ${categorii}" th:value="${cat.idCategorie}" th:text="${cat.denumire}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('categorie')}" th:errors="*{categorie}" style="color:red"></span></p>
+        <p><label>Combustibil:</label>
+            <select th:field="*{combustibil}">
+                <option value="">-- alege --</option>
+                <option value="benzina">benzina</option>
+                <option value="motorina">motorina</option>
+                <option value="hibrid">hibrid</option>
+                <option value="electric">electric</option>
+                <option value="gpl">gpl</option>
+            </select>
+            <span th:if="${#fields.hasErrors('combustibil')}" th:errors="*{combustibil}" style="color:red"></span></p>
+        <p><label>Transmisie:</label>
+            <select th:field="*{transmisie}">
+                <option value="">-- alege --</option>
+                <option value="manuala">manuala</option>
+                <option value="automata">automata</option>
+            </select>
+            <span th:if="${#fields.hasErrors('transmisie')}" th:errors="*{transmisie}" style="color:red"></span></p>
+        <p><label>Km curenti:</label>
+            <input type="number" th:field="*{kmCurenti}">
+            <span th:if="${#fields.hasErrors('kmCurenti')}" th:errors="*{kmCurenti}" style="color:red"></span></p>
+        <p><label>Stare:</label>
+            <select th:field="*{stare}">
+                <option value="disponibil">disponibil</option>
+                <option value="inchiriat">inchiriat</option>
+                <option value="mentenanta">mentenanta</option>
+                <option value="indisponibil">indisponibil</option>
+            </select>
+            <span th:if="${#fields.hasErrors('stare')}" th:errors="*{stare}" style="color:red"></span></p>
+        <button type="submit">Salveaza</button>
+        <a th:href="@{/autovehicule}">Anuleaza</a>
+    </form>
+</main>
 </body>
 </html>

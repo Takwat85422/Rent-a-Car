@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head th:replace="~{fragments/layout :: head('RentACar - Acasa')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1>Administrare inchirieri auto</h1>
+    <div class="cards">
+        <a class="card" th:href="@{/contracte}"><h3>Contracte</h3><p>Contracte de inchiriere</p></a>
+        <a class="card" th:href="@{/clienti}"><h3>Clienti</h3><p>Clientii firmei</p></a>
+        <a class="card" th:href="@{/permise}"><h3>Permise</h3><p>Permise de conducere</p></a>
+        <a class="card" th:href="@{/autovehicule}"><h3>Autovehicule</h3><p>Flota de masini</p></a>
+        <a class="card" th:href="@{/categorii}"><h3>Categorii</h3><p>Categorii de masini</p></a>
+        <a class="card" th:href="@{/locatii}"><h3>Locatii</h3><p>Puncte de lucru</p></a>
+        <a class="card" th:href="@{/servicii}"><h3>Servicii extra</h3><p>Servicii optionale</p></a>
+        <a class="card" th:href="@{/plati}"><h3>Plati</h3><p>Plati pe contracte</p></a>
+        <a class="card" th:href="@{/daune}"><h3>Daune</h3><p>Daune constatate</p></a>
+    </div>
+</main>
+</body>
+</html>

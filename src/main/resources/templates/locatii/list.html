@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Locatii</title>
-</head>
+<head th:replace="~{fragments/layout :: head('Locatii')}"></head>
 <body>
-<h1>Locatii</h1>
-
-<a th:href="@{/locatii/nou}">+ Adauga locatie</a>
-
-<table border="1" cellpadding="6">
-    <thead>
-    <tr><th>ID</th><th>Oras</th><th>Adresa</th><th>Tip</th><th>Program</th><th>Actiuni</th></tr>
-    </thead>
-    <tbody>
-    <tr th:each="l : ${locatii}">
-        <td th:text="${l.idLocatie}"></td>
-        <td th:text="${l.oras}"></td>
-        <td th:text="${l.adresa}"></td>
-        <td th:text="${l.tip}"></td>
-        <td th:text="${l.program}"></td>
-        <td>
-            <a th:href="@{/locatii/{id}/editare(id=${l.idLocatie})}">Editeaza</a>
-            <form th:action="@{/locatii/{id}/sterge(id=${l.idLocatie})}" method="post"
-                  style="display:inline" onsubmit="return confirm('Sigur stergi?');">
-                <button type="submit">Sterge</button>
-            </form>
-        </td>
-    </tr>
-    <tr th:if="${locatii.isEmpty()}">
-        <td colspan="6">Nicio locatie inca.</td>
-    </tr>
-    </tbody>
-</table>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main>
+    <h1>Locatii</h1>
+    <a th:href="@{/locatii/nou}">+ Adauga locatie</a>
+    <table>
+        <thead>
+        <tr><th>ID</th><th>Oras</th><th>Adresa</th><th>Tip</th><th>Program</th><th>Actiuni</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${locatii}">
+            <td th:text="${l.idLocatie}"></td>
+            <td th:text="${l.oras}"></td>
+            <td th:text="${l.adresa}"></td>
+            <td th:text="${l.tip}"></td>
+            <td th:text="${l.program}"></td>
+            <td>
+                <a th:href="@{/locatii/{id}/editare(id=${l.idLocatie})}">Editeaza</a>
+                <form th:action="@{/locatii/{id}/sterge(id=${l.idLocatie})}" method="post"
+                      style="display:inline" onsubmit="return confirm('Sigur stergi?');">
+                    <button type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${locatii.isEmpty()}">
+            <td colspan="6">Nicio locatie inca.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
 </body>
 </html>
