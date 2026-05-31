@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Contract</title>
+</head>
+<body>
+<h1 th:text="${contract.idContract} == null ? 'Adauga contract' : 'Editeaza contract'">Contract</h1>
+
+<form th:action="@{/contracte/salveaza}" th:object="${contract}" method="post">
+    <input type="hidden" th:field="*{idContract}">
+
+    <p><label>Client:</label>
+        <select th:field="*{client}">
+            <option value="">-- alege --</option>
+            <option th:each="cl : ${clienti}" th:value="${cl.idClient}"
+                    th:text="${cl.nume + ' ' + cl.prenume}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}" style="color:red"></span></p>
+
+    <p><label>Autovehicul:</label>
+        <select th:field="*{autovehicul}">
+            <option value="">-- alege --</option>
+            <option th:each="a : ${autovehicule}" th:value="${a.idAutovehicul}"
+                    th:text="${a.marca + ' ' + a.model + ' (' + a.nrInmatriculare + ')'}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('autovehicul')}" th:errors="*{autovehicul}" style="color:red"></span></p>
+
+    <p><label>Locatie ridicare:</label>
+        <select th:field="*{locatieRidicare}">
+            <option value="">-- alege --</option>
+            <option th:each="l : ${locatii}" th:value="${l.idLocatie}"
+                    th:text="${l.oras + ' - ' + l.adresa}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('locatieRidicare')}" th:errors="*{locatieRidicare}" style="color:red"></span></p>
+
+    <p><label>Locatie predare:</label>
+        <select th:field="*{locatiePredare}">
+            <option value="">-- alege --</option>
+            <option th:each="l : ${locatii}" th:value="${l.idLocatie}"
+                    th:text="${l.oras + ' - ' + l.adresa}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('locatiePredare')}" th:errors="*{locatiePredare}" style="color:red"></span></p>
+
+    <p><label>Data start:</label>
+        <input type="date" th:field="*{dataStart}">
+        <span th:if="${#fields.hasErrors('dataStart')}" th:errors="*{dataStart}" style="color:red"></span></p>
+
+    <p><label>Data sfarsit:</label>
+        <input type="date" th:field="*{dataSfarsit}">
+        <span th:if="${#fields.hasErrors('dataSfarsit')}" th:errors="*{dataSfarsit}" style="color:red"></span></p>
+
+    <p><label>Status:</label>
+        <select th:field="*{status}">
+            <option value="activ">activ</option>
+            <option value="inchis">inchis</option>
+            <option value="anulat">anulat</option>
+        </select>
+        <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}" style="color:red"></span></p>
+
+    <p><label>Km return:</label>
+        <input type="number" th:field="*{kmReturn}">
+        <span th:if="${#fields.hasErrors('kmReturn')}" th:errors="*{kmReturn}" style="color:red"></span></p>
+
+    <p><label>Servicii extra:</label><br>
+        <select th:field="*{servicii}" multiple size="5">
+            <option th:each="s : ${toateServiciile}" th:value="${s.idServiciu}"
+                    th:text="${s.denumire}"></option>
+        </select>
+        <br><small>(Ctrl / Cmd + click pentru selectie multipla)</small></p>
+
+    <button type="submit">Salveaza</button>
+    <a th:href="@{/contracte}">Anuleaza</a>
+</form>
+</body>
+</html>

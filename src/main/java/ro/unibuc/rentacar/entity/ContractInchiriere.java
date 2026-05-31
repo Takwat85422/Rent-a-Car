@@ -50,7 +50,7 @@ public class ContractInchiriere {
     @Column(name = "data_sfarsit", nullable = false)
     private LocalDate dataSfarsit;
 
-    @NotNull
+
     @DecimalMin(value = "0.0", inclusive = false)
     @Column(name = "tarif_zi", nullable = false, precision = 8, scale = 2)
     private BigDecimal tarifZi;
