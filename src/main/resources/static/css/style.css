@@ -53,3 +53,18 @@ form button + a { margin-left:10px; }
 .pagination span { color:var(--muted); font-size:14px; }
 th a { text-decoration:none; font-size:11px; color:var(--muted); }
 th a:hover { color:var(--primary); }
+
+
+.error-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 520px;
+  text-align: center;
+}
+.error-icon { font-size: 48px; color: var(--danger); margin-bottom: 12px; }
+.error-box h1 { color: var(--danger); margin-bottom: 8px; }
+.error-box p { color: var(--muted); margin-bottom: 24px; }
+.error-box a { color: var(--primary); text-decoration: none; font-weight: 600; }
+.error-box a:hover { text-decoration: underline; }
