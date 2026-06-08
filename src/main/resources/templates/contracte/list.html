@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Contracte de inchiriere</h1>
-    <a th:href="@{/contracte/nou}">+ Adauga contract</a>
+    <a th:if="${isAdmin}" th:href="@{/contracte/nou}">+ Adauga contract</a>
     <table>
         <thead>
         <tr>
@@ -37,11 +37,13 @@
             <td th:text="${c.status}"></td>
             <td th:text="${c.servicii.size()}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/contracte/{id}/editare(id=${c.idContract})}">Editeaza</a>
                 <form th:action="@{/contracte/{id}/sterge(id=${c.idContract})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="9">Niciun contract inca.</td></tr>

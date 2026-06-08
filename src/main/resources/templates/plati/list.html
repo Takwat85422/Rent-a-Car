@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Plati</h1>
-    <a th:href="@{/plati/nou}">+ Adauga plata</a>
+    <a th:if="${isAdmin}" th:href="@{/plati/nou}">+ Adauga plata</a>
     <table>
         <thead>
         <tr>
@@ -31,11 +31,13 @@
             <td th:text="${p.metoda}"></td>
             <td th:text="${p.status}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/plati/{id}/editare(id=${p.idPlata})}">Editeaza</a>
                 <form th:action="@{/plati/{id}/sterge(id=${p.idPlata})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="7">Nicio plata inca.</td></tr>

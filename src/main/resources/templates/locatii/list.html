@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Locatii</h1>
-    <a th:href="@{/locatii/nou}">+ Adauga locatie</a>
+    <a th:if="${isAdmin}" th:href="@{/locatii/nou}">+ Adauga locatie</a>
     <table>
         <thead>
         <tr>
@@ -29,11 +29,13 @@
             <td th:text="${l.tip}"></td>
             <td th:text="${l.program}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/locatii/{id}/editare(id=${l.idLocatie})}">Editeaza</a>
                 <form th:action="@{/locatii/{id}/sterge(id=${l.idLocatie})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="6">Nicio locatie inca.</td></tr>

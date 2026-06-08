@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Categorii auto</h1>
-    <a th:href="@{/categorii/nou}">+ Adauga categorie</a>
+    <a th:if="${isAdmin}" th:href="@{/categorii/nou}">+ Adauga categorie</a>
     <table>
         <thead>
         <tr>
@@ -29,11 +29,13 @@
             <td th:text="${c.categoriePermisNecesara}"></td>
             <td th:text="${c.tarifZi}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/categorii/{id}/editare(id=${c.idCategorie})}">Editeaza</a>
                 <form th:action="@{/categorii/{id}/sterge(id=${c.idCategorie})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="6">Nicio categorie inca.</td></tr>

@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Clienti</h1>
-    <a th:href="@{/clienti/nou}">+ Adauga client</a>
+    <a th:if="${isAdmin}" th:href="@{/clienti/nou}">+ Adauga client</a>
     <table>
         <thead>
         <tr>
@@ -35,11 +35,13 @@
             <td th:text="${c.statusClient}"></td>
             <td th:text="${c.permis != null ? c.permis.numarPermis : '-'}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/clienti/{id}/editare(id=${c.idClient})}">Editeaza</a>
                 <form th:action="@{/clienti/{id}/sterge(id=${c.idClient})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="9">Niciun client inca.</td></tr>

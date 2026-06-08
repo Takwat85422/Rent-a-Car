@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Permise de conducere</h1>
-    <a th:href="@{/permise/nou}">+ Adauga permis</a>
+    <a th:if="${isAdmin}" th:href="@{/permise/nou}">+ Adauga permis</a>
     <table>
         <thead>
         <tr>
@@ -33,11 +33,13 @@
             <td th:text="${p.dataExpirare}"></td>
             <td th:text="${p.client != null ? p.client.nume + ' ' + p.client.prenume : ''}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/permise/{id}/editare(id=${p.idPermis})}">Editeaza</a>
                 <form th:action="@{/permise/{id}/sterge(id=${p.idPermis})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="8">Niciun permis inca.</td></tr>

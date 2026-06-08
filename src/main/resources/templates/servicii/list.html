@@ -5,7 +5,7 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Servicii extra</h1>
-    <a th:href="@{/servicii/nou}">+ Adauga serviciu</a>
+    <a th:if="${isAdmin}" th:href="@{/servicii/nou}">+ Adauga serviciu</a>
     <table>
         <thead>
         <tr>
@@ -29,11 +29,13 @@
             <td th:text="${s.pretZi}"></td>
             <td th:text="${s.activ}"></td>
             <td>
+                <span th:if="${isAdmin}">
                 <a th:href="@{/servicii/{id}/editare(id=${s.idServiciu})}">Editeaza</a>
                 <form th:action="@{/servicii/{id}/sterge(id=${s.idServiciu})}" method="post"
                       style="display:inline" onsubmit="return confirm('Sigur stergi?');">
                     <button type="submit">Sterge</button>
                 </form>
+                </span>
             </td>
         </tr>
         <tr th:if="${page.content.isEmpty()}"><td colspan="6">Niciun serviciu inca.</td></tr>
