@@ -68,3 +68,13 @@ th a:hover { color:var(--primary); }
 .error-box p { color: var(--muted); margin-bottom: 24px; }
 .error-box a { color: var(--primary); text-decoration: none; font-weight: 600; }
 .error-box a:hover { text-decoration: underline; }
+
+
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.navuser { color: #d1d5db; font-size: 14px; }
+.nav-right form button { background: transparent; border: 1px solid #4b5563; padding: 6px 12px; }
+.nav-right form button:hover { background: #1f2937; }
+.login-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 32px; max-width: 360px; margin: 40px auto; }
+.login-box h1 { margin-bottom: 16px; }
+.login-box form p { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }

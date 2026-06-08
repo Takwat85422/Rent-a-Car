@@ -18,6 +18,12 @@
     <a th:href="@{/servicii}">Servicii</a>
     <a th:href="@{/plati}">Plati</a>
     <a th:href="@{/daune}">Daune</a>
+    <span class="nav-right">
+        <span class="navuser" th:if="${currentUser}" th:text="${currentUser}"></span>
+        <form th:if="${currentUser}" th:action="@{/logout}" method="post" style="display:inline">
+            <button type="submit">Logout</button>
+        </form>
+    </span>
 </nav>
 </body>
 </html>

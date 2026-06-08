@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head th:replace="~{fragments/layout :: head('Autentificare')}"></head>
+<body>
+<main>
+  <div class="login-box">
+    <h1>Autentificare</h1>
+    <p th:if="${param.error}" style="color:red">Utilizator sau parola gresita.</p>
+    <p th:if="${param.logout}" style="color:green">Te-ai delogat cu succes.</p>
+    <form th:action="@{/login}" method="post">
+      <p><label>Utilizator:</label><input type="text" name="username" autofocus></p>
+      <p><label>Parola:</label><input type="password" name="password"></p>
+      <button type="submit">Intra</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>
