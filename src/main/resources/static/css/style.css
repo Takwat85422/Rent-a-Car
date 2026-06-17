@@ -78,3 +78,57 @@ th a:hover { color:var(--primary); }
   padding: 32px; max-width: 360px; margin: 40px auto; }
 .login-box h1 { margin-bottom: 16px; }
 .login-box form p { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+
+
+
+.badge { display:inline-block; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:600; }
+.status-activ, .status-disponibil, .status-confirmata, .status-DA { background:#dcfce7; color:#166534; }
+.status-inchiriat, .status-mentenanta, .status-in_asteptare, .status-deschisa { background:#fef9c3; color:#854d0e; }
+.status-inchis, .status-inchisa, .status-inactiv, .status-NU { background:#f3f4f6; color:#374151; }
+.status-anulat, .status-anulata, .status-blocat, .status-respinsa, .status-indisponibil { background:#fee2e2; color:#991b1b; }
+
+.stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:16px; }
+.stat { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:20px; text-align:center; }
+.stat-num { display:block; font-size:32px; font-weight:700; color:var(--primary); }
+.stat-label { display:block; color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-top:4px; }
+
+
+form[style*="display:inline"] {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+/* --- butoane de actiune uniforme in coloana Actiuni --- */
+td:last-child { white-space: nowrap; }   /* tine butoanele pe acelasi rand */
+
+td a,
+td form button {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+td a {                       /* Editeaza - buton secundar deschis */
+  background: #eef2ff;
+  color: var(--primary);
+  margin-right: 6px;
+}
+td a:hover { background: #e0e7ff; }
+
+td form { display: inline; }
+td form button { background: var(--danger); color: #fff; }  /* Sterge */
+td form button:hover { background: #b91c1c; }
+
+.checkbox-list { display:flex; flex-direction:column; gap:8px; border:1px solid var(--border);
+  border-radius:6px; padding:12px; background:#fff; margin-bottom:14px; }
+.checkbox-item { display:flex; align-items:center; gap:8px; font-weight:400; cursor:pointer; }
+.checkbox-list input[type=checkbox] { width:16px; height:16px; padding:0; margin:0; }

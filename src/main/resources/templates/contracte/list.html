@@ -34,7 +34,7 @@
             <td th:text="${c.dataStart}"></td>
             <td th:text="${c.dataSfarsit}"></td>
             <td th:text="${c.tarifZi}"></td>
-            <td th:text="${c.status}"></td>
+            <td><span th:class="${'badge status-' + c.status}" th:text="${c.status}"></span></td>
             <td th:text="${c.servicii.size()}"></td>
             <td>
                 <span th:if="${isAdmin}">

@@ -30,7 +30,7 @@
             <td th:text="${d.dataConstatare}"></td>
             <td th:text="${d.descriere}"></td>
             <td th:text="${d.cost}"></td>
-            <td th:text="${d.status}"></td>
+            <td><span th:class="${'badge status-' + d.status}" th:text="${d.status}"></span></td>
             <td th:text="${d.responsabil}"></td>
             <td>
                 <span th:if="${isAdmin}">

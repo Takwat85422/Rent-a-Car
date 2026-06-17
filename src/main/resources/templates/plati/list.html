@@ -29,7 +29,7 @@
             <td th:text="${p.dataPlata}"></td>
             <td th:text="${p.suma}"></td>
             <td th:text="${p.metoda}"></td>
-            <td th:text="${p.status}"></td>
+            <td><span th:class="${'badge status-' + p.status}" th:text="${p.status}"></span></td>
             <td>
                 <span th:if="${isAdmin}">
                 <a th:href="@{/plati/{id}/editare(id=${p.idPlata})}">Editeaza</a>

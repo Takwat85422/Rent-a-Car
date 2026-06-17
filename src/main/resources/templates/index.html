@@ -5,6 +5,16 @@
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
 <main>
     <h1>Administrare inchirieri auto</h1>
+
+    <div class="stats">
+        <div class="stat"><span class="stat-num" th:text="${nrContracte}">0</span><span class="stat-label">Contracte</span></div>
+        <div class="stat"><span class="stat-num" th:text="${nrClienti}">0</span><span class="stat-label">Clienti</span></div>
+        <div class="stat"><span class="stat-num" th:text="${nrAutovehicule}">0</span><span class="stat-label">Autovehicule</span></div>
+        <div class="stat"><span class="stat-num" th:text="${nrPlati}">0</span><span class="stat-label">Plati</span></div>
+        <div class="stat"><span class="stat-num" th:text="${nrDaune}">0</span><span class="stat-label">Daune</span></div>
+    </div>
+
+    <h2 style="margin-top:28px; font-size:18px;">Module</h2>
     <div class="cards">
         <a class="card" th:href="@{/contracte}"><h3>Contracte</h3><p>Contracte de inchiriere</p></a>
         <a class="card" th:href="@{/clienti}"><h3>Clienti</h3><p>Clientii firmei</p></a>

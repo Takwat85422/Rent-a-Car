@@ -41,7 +41,7 @@
             <td th:text="${a.combustibil}"></td>
             <td th:text="${a.transmisie}"></td>
             <td th:text="${a.kmCurenti}"></td>
-            <td th:text="${a.stare}"></td>
+            <td><span th:class="${'badge status-' + a.stare}" th:text="${a.stare}"></span></td>
             <td>
                 <span th:if="${isAdmin}">
                 <a th:href="@{/autovehicule/{id}/editare(id=${a.idAutovehicul})}">Editeaza</a>

@@ -32,7 +32,7 @@
             <td th:text="${c.cnp}"></td>
             <td th:text="${c.email}"></td>
             <td th:text="${c.telefon}"></td>
-            <td th:text="${c.statusClient}"></td>
+            <td><span th:class="${'badge status-' + c.statusClient}" th:text="${c.statusClient}"></span></td>
             <td th:text="${c.permis != null ? c.permis.numarPermis : '-'}"></td>
             <td>
                 <span th:if="${isAdmin}">

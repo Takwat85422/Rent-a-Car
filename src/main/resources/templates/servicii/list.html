@@ -27,7 +27,7 @@
             <td th:text="${s.denumire}"></td>
             <td th:text="${s.descriere}"></td>
             <td th:text="${s.pretZi}"></td>
-            <td th:text="${s.activ}"></td>
+            <td><span th:class="${'badge status-' + s.activ}" th:text="${s.activ}"></span></td>
             <td>
                 <span th:if="${isAdmin}">
                 <a th:href="@{/servicii/{id}/editare(id=${s.idServiciu})}">Editeaza</a>
